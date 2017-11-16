@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Formz</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body>
+		<h1>Bootstrap Formları</h1>
+		<hr />
+		<div class="content">
+			<form method="POST" action="http://localhost:8080/go-form">
+				<div class="form-group">
+					<label class="control-label">Eğitmen Adı: </label>
+					<p class="form-control-static">Gökalp Gürbüzer</p>
+				</div>
+				<div class="form-group">
+					<label for="name" class="control-label">Adı : </label>
+					<input type="text" id="name" class="form-control" name="name" placeholder="Can Ali" required />
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<p class="help-block">Soyadını da yaz istersen</p>			
+				</div>
+				<div class="form-group">
+					<label for="birthdate" class="control-label">Doğum Tarihi : </label>
+					<div class="input-group">
+						<div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+						<input type="date" name="birthdate" id="birthdate" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Cinsiyet : </label>
+					<div class="radio">
+						<label><input type="radio" id="male" name="sex" value="M" />Erkek</label>
+					<div class="radio">
+						<label><input type="radio" id="female" name="sex" value="F" />Kadın</label>
+					</div>
+					<div class="radio">
+						<label><input type="radio" id="sexNotDisclosed" name="sex" value="O" />Yanıt vermemeyi trecih ediyorum</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bio">Hikayesi</label>
+					<textarea id="bio" name="bio" class="form-control"></textarea>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" name="smoker" value="" />Sigara Kullanıyorum</label>
+				</div>
+				<input type="reset" value="Sıfırla">
+				<input type="submit" name="save" value="Kaydet" />
+				<input type="submit" name="save" value="Kaydet ama emin de değilim" />
+			</form>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$().ready(() => {
+				$('input[type=submit]').click(event => {
+					var requiredInputs = $('input[required]');
+					requiredInputs.each((ix, elem) => { 
+						var valid = true;
+						if (!$(elem).val()) {
+							valid = false;
+							$(elem).parent().addClass('has-error').addClass('has-feedback');
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

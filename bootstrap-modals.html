@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Modal</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body style="max-width:700px" class="center-block">
+		<div class="content">
+			<h1>Bootstrap Modal</h1>
+			<button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#lorem">Gimme a modal !</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">Form in a modal</button>
+			<button type="button" id="btnOpenForm" class="btn btn-primary">Open Form with JS</button>
+		</div>
+
+		<div class="modal fade in" id="lorem" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<p class="modal-title">Modal Header</p>
+					</div>
+					<div class="modal-body">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere massa a sapien tempor, eget ultrices dui tincidunt. Phasellus vulputate vulputate enim, in fringilla ex euismod ac. Phasellus laoreet lectus dui, nec interdum odio convallis eu. Maecenas dignissim enim tortor. Donec varius fermentum malesuada. Nam nec elit eu orci egestas scelerisque. Mauris convallis dolor felis, at egestas enim feugiat vitae. Aliquam nec libero vitae dui fermentum suscipit. Etiam facilisis vel tellus vitae feugiat. Vivamus laoreet sem at lobortis posuere. Proin vitae odio eu ante sollicitudin mattis.
+					</div>
+					<div class="modal-footer">
+						Modal Footer
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="formModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<p class="modal-title">Modal Header</p>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="http://localhost:8080/go-form">
+							<div class="form-group">
+								<label class="control-label">Eğitmen Adı: </label>
+								<p class="form-control-static">Gökalp Gürbüzer</p>
+							</div>
+							<div class="form-group">
+								<label for="name" class="control-label">Adı : </label>
+								<input type="text" id="name" class="form-control" name="name" placeholder="Can Ali" required />
+								<p class="help-block">Soyadını da yaz istersen</p>			
+							</div>
+							<div class="form-group">
+								<label for="birthdate" class="control-label">Doğum Tarihi : </label>
+								<div class="input-group">
+									<div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
+									<input type="date" name="birthdate" id="birthdate" class="form-control" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Cinsiyet : </label>
+								<div class="radio">
+									<label><input type="radio" id="male" name="sex" value="M" />Erkek</label>
+								<div class="radio">
+									<label><input type="radio" id="female" name="sex" value="F" />Kadın</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" id="sexNotDisclosed" name="sex" value="O" />Yanıt vermemeyi trecih ediyorum</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="bio">Hikayesi</label>
+								<textarea id="bio" name="bio" class="form-control"></textarea>
+							</div>
+							<div class="checkbox">
+								<label><input type="checkbox" name="smoker" value="" />Sigara Kullanıyorum</label>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+						<button type="button" class="btn btn-default">Sıfırla</button>
+						<button type="button" class="btn btn-warning" name="save" data-toggle="popover" title="Bak pek emin değilim" data-content="Emin olsam zaten bu düğmeye tıklamam">Kaydet ama pek de emin değilim</button>
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Bundan eminim" data-placement="bottom">Kaydet</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$().ready(() => {
+				$('#formModal').on('shown.bs.modal', () => $('#formModal input')[0].focus());
+
+				$('#btnOpenForm').click(() => {
+					$('#formModal').modal('show');
+				});
+
+				 $('[data-toggle="tooltip"]').tooltip();
+				 $('[data-toggle="popover"]').popover();
+ 			});
+		</script>
+	</body>
+</html>
