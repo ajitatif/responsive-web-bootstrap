@@ -11,16 +11,16 @@
 	<body>
 		<h1>Bootstrap Formları</h1>
 		<hr />
-		<div class="content">
+		<div class="content center-block" style="width: 50%; min-width: 600px">
 			<form method="POST" action="http://localhost:8080/go-form">
 				<div class="form-group">
 					<label class="control-label">Eğitmen Adı: </label>
 					<p class="form-control-static">Gökalp Gürbüzer</p>
 				</div>
 				<div class="form-group">
-					<label for="name" class="control-label">Adı : </label>
-					<input type="text" id="name" class="form-control" name="name" placeholder="Can Ali" required />
-					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<label class="control-label">Eğitmen Adı: </label>
+					<input type="text" id="name" class="form-control" name="name" title="Ad" data-toggle="tooltip" placeholder="Adınız" required pattern="[A-Za-zöçışğüÖÇİŞĞÜ]+( [A-Za-zöçışğüÖÇİŞĞÜ]+)+" />
+					<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 					<p class="help-block">Soyadını da yaz istersen</p>			
 				</div>
 				<div class="form-group">
@@ -28,16 +28,19 @@
 					<div class="input-group">
 						<div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
 						<input type="date" name="birthdate" id="birthdate" class="form-control" />
+						<div class="input-group-addon">Tarih 1</div>
+						<div class="input-group-addon">Tarih</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label>Cinsiyet : </label>
-					<div class="radio">
+					<label class="control-label">Cinsiyet : </label>
+					<div class="radio-inline">
 						<label><input type="radio" id="male" name="sex" value="M" />Erkek</label>
-					<div class="radio">
+					</div>
+					<div class="radio-inline">
 						<label><input type="radio" id="female" name="sex" value="F" />Kadın</label>
 					</div>
-					<div class="radio">
+					<div class="radio-inline">
 						<label><input type="radio" id="sexNotDisclosed" name="sex" value="O" />Yanıt vermemeyi trecih ediyorum</label>
 					</div>
 				</div>
@@ -47,6 +50,42 @@
 				</div>
 				<div class="checkbox">
 					<label><input type="checkbox" name="smoker" value="" />Sigara Kullanıyorum</label>
+				</div>
+				<div class="form-group">
+					<label>Şehir</label>
+					<select class="form-control" multiple style="height: 50%; max-height: 150px">
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+						<option>İstanbul</option>
+						<option>Ankara</option>
+						<option>İzmir</option>
+					</select>
+					<p class="help-block">Şehir seçiniz</p>
 				</div>
 				<input type="reset" value="Sıfırla">
 				<input type="submit" name="save" value="Kaydet" />
@@ -66,7 +105,15 @@
 							$(elem).parent().addClass('has-error').addClass('has-feedback');
 						}
 					});
+
+					$('input[pattern]').each((ix, elem) => {
+						var pattern = elem.pattern;
+						if (!$(elem).val().match(pattern)) {
+							$(elem).parent().addClass('has-warning').addClass('has-feedback');	
+						}
+					});
 				});
+				$('[data-toggle="tooltip"]').tooltip();
 			});
 		</script>
 	</body>
