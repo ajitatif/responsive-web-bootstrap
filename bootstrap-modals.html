@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
-	<body style="max-width:700px" class="center-block">
+	<body style="max-width:800px" class="center-block">
 		<div class="content">
 			<h1>Bootstrap Modal</h1>
 			<button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#lorem">Gimme a modal !</button>
@@ -20,7 +20,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        				<button type="button" class="close" data-dismiss="modal"></button>
 						<p class="modal-title">Modal Header</p>
 					</div>
 					<div class="modal-body">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="modal fade" id="formModal" tabindex="-1">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
         				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -80,8 +80,9 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
 						<button type="button" class="btn btn-default">Sıfırla</button>
-						<button type="button" class="btn btn-warning" name="save" data-toggle="popover" title="Bak pek emin değilim" data-content="Emin olsam zaten bu düğmeye tıklamam">Kaydet ama pek de emin değilim</button>
-						<button type="button" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Bundan eminim" data-placement="bottom">Kaydet</button>
+						<button type="button" class="btn btn-info" name="save" data-toggle="popover" title="Bak pek emin değilim" data-content="Emin olsam zaten bu düğmeye tıklamam" data-placement="top">Kaydet ama pek de emin değilim</button>
+						<button type="button" class="btn btn-warning" name="save" id="btnDont">Kaydetme</button>
+						<button type="button" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Bundan eminim" data-placement="top" id="btnSave">Kaydet</button>
 					</div>
 				</div>
 			</div>
@@ -93,14 +94,40 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$().ready(() => {
+				var modalStatus = undefined;
 				$('#formModal').on('shown.bs.modal', () => $('#formModal input')[0].focus());
+				$('#formModal').on('hidden.bs.modal', formClosed);
+
 
 				$('#btnOpenForm').click(() => {
 					$('#formModal').modal('show');
 				});
 
-				 $('[data-toggle="tooltip"]').tooltip();
-				 $('[data-toggle="popover"]').popover();
+				$('#btnDont').click(() => {
+					
+					closeForm('Not OK');
+				});
+
+				$('#btnSave').click(() => {
+					
+					closeForm('OK');
+				});
+
+				$('[data-toggle="tooltip"]').tooltip({ placement: 'left' });
+				$('[data-toggle="popover"]').popover();
+
+
+				function closeForm(status) {
+					$('#formModal').modal('hide');
+					modalStatus = status;
+				}
+
+				function formClosed() {
+					if (!!modalStatus) {
+						alert(`Modal Kapandı: ${modalStatus}`);
+						modalStatus = undefined;
+					}
+				}
  			});
 		</script>
 	</body>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bootstrap Modal</title>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+	<body style="max-width:700px" class="center-block">
+		<div class="content">
+			<h1>Bootstrap Components</h1>
+			<hr />
+
+			<ul class="nav nav-pills">
+				<li class="active"><a href="#dropdown" data-toggle="tab">Dropdown</a></li>
+				<li><a href="#navbar" data-toggle="tab">Navbar</a></li>
+				<li><a id="formTab" href="#forms" data-toggle="tab">Forms</a></li>
+				<li><a href="#breadcrumbs" data-toggle="tab">Breadcrumbs</a></li>
+			</ul>
+
+			<div class="tab-content" style="margin-top: 50px">
+				<div class="tab-pane active" id="dropdown">
+					<div class="dropdown">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="buttonText">Şehirler</span> <span class="caret"> </span></button>
+						
+						<ul class="dropdown-menu">
+							<li><a href="#bolu">Bolu</a></li>
+							<li><a href="#eskişehir">Eskişehir</a></li>
+							<li><a href="#hatay">Hatay</a></li>
+							<li class="divider"></li>
+							<li><a href="#bursa">Bursa</a></li>
+						</ul> 
+					</div>				
+				</div>
+
+				<div class="tab-pane" id="navbar">
+					Curabitur at pharetra lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce eget hendrerit purus, sit amet bibendum lorem. Proin maximus urna metus, sit amet condimentum est commodo et. Mauris tristique lorem nulla, id luctus lectus sagittis vel. Donec elit ipsum, venenatis et purus nec, congue feugiat est. Ut ac aliquam odio. Cras accumsan leo mi, iaculis porttitor ex mattis eget. Aenean sapien diam, fermentum sit amet libero sed, fringilla finibus orci. Donec in sem tincidunt, consequat leo non, auctor neque. Proin nec nibh id neque imperdiet aliquam quis eu eros. Fusce gravida posuere elementum.
+				</div>
+
+				<div id="forms" class="tab-pane">
+					Loading...
+				</div>
+
+				<div id="breadcrumbs" class="tab-pane">
+					<ol class="breadcrumb">
+						<li><a href="#bursa">Bursa</a></li>
+						<li><a href="#orhangazi">Orhangazi</a></li>
+						<li class="active">Yeniköy</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$().ready(() => {
+
+				$('.dropdown li a').click((event) => {
+					var anchor = event.target;
+					$(anchor).parents().eq(3).find('button .buttonText').text($(anchor).text());
+
+					event.preventDefault();
+				});
+
+				$('#formTab').on('shown.bs.tab', (event) => {
+					$.get('https://www.google.com', (data) => {
+						$('#forms').html(data);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
